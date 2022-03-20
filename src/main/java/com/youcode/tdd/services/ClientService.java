@@ -23,13 +23,12 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public Client getClientById(Long id){
-        Optional<Client> client = clientRepository.findById(id);
-        return client.get();
+    public Optional<Client> getClientById(Long id) {
+        return clientRepository.findById(id);
     }
-    public Client getClientByEmail(String email){
-        Optional<Client> client = clientRepository.findByEmail(email);
-        return client.get();
+
+    public Optional<Client> getClientByEmail(String email) {
+        return clientRepository.findByEmail(email);
     }
 
 

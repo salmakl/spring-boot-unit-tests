@@ -4,9 +4,12 @@ import com.youcode.tdd.entities.Client;
 import com.youcode.tdd.services.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
@@ -23,10 +26,20 @@ public class ClientsController {
         return clientService.getClients();
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public void addClient(@RequestBody Client client){
 
         clientService.newClient(client);
+    }
+
+    @GetMapping("{clientId:^\\d+$}")
+    public Optional<Client> getClientById(@PathVariable("clientId") Long id) {
+        return clientService.getClientById(id);
+    }
+
+    @GetMapping("{email:.+@.+\\..+}")
+    public Optional<Client> getClientByEmail(@PathVariable("email") String email) {
+        return clientService.getClientByEmail(email);
     }
 
     public void updateClient(@PathVariable Long id,@RequestParam String name,String email){
