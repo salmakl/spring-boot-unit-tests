@@ -4,7 +4,9 @@ import com.youcode.tdd.entities.Client;
 import com.youcode.tdd.repositories.ClientRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -42,7 +44,20 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
-    @Transactional
+
+    public void updateClient(Long id, Client client) {
+
+        Client updateClient = clientRepository.getById(id);
+
+        updateClient.setFullName(client.getFullName());
+        updateClient.setEmail(client.getEmail());
+        updateClient.setGender(client.getGender());
+        updateClient.setPhone(client.getPhone());
+        updateClient.setActive(client.isActive());
+
+        clientRepository.save(updateClient);
+    }
+  /*  @Transactional
     public void updateClient(Long id, String name, String email) {
         Client client = clientRepository.findById(id).orElseThrow(()->
                 new IllegalStateException("Client with id " + id + " does not exist"));
@@ -58,9 +73,9 @@ public class ClientService {
             client.setEmail(email);
         }
 
-    }
+    }*/
 
-    public void deleteClient(Long id){
+  /*  public void deleteClient(Long id){
 
         boolean exists = clientRepository.existsById(id);
 
@@ -69,5 +84,17 @@ public class ClientService {
         }
 
         clientRepository.deleteById(id);
+    }*/
+
+    public void deleteClient(Long id) {
+        Optional<Client> client = clientRepository.findById(id);
+
+        if (client.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "client not found");
+        }
+
+        client.get().setActive(false);
     }
+
+
 }

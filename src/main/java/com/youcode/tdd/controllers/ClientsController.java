@@ -42,13 +42,16 @@ public class ClientsController {
         return clientService.getClientByEmail(email);
     }
 
-    public void updateClient(@PathVariable Long id,@RequestParam String name,String email){
-        clientService.updateClient(id, name, email);
+    @PutMapping(path = "{id}")
+    public void updateClient(@PathVariable Long id,@RequestBody Client client){
+        System.out.println("full nmm" + client.getFullName());
+        clientService.updateClient(id, client);
 
     }
-    @DeleteMapping(path = "{id}")
-    public void deleteClient(@PathVariable("id") Long id){
+    @DeleteMapping("{id}")
+    public void deleteClient(@PathVariable Long id){
         clientService.deleteClient(id);
     }
+
 
 }
