@@ -59,4 +59,12 @@ class ClientRepositoryTest {
 
     }
 
+
+    @Test
+    void findByEmailTest(){
+        Client client1 = new Client(1L, "test1@gmail.com","+212659697087","test1",12,"female",true);
+        Mockito.when(clientRepository.findByEmail("test1@gmail.com")).thenReturn(Optional.of(client1));
+        assertThat(clientRepository.findByEmail("test1@gmail.com").get().getEmail()).isEqualTo("test1@gmail.com");
+    }
+
 }
