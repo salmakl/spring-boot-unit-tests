@@ -33,7 +33,9 @@ public class ClientService {
         return clientRepository.findByEmail(email);
     }
 
-
+    public List<Client> getClientsByGender(String sex) {
+        return clientRepository.findAllByGender(sex);
+    }
 
     public Client newClient(Client client){
 
@@ -57,34 +59,6 @@ public class ClientService {
 
         clientRepository.save(updateClient);
     }
-  /*  @Transactional
-    public void updateClient(Long id, String name, String email) {
-        Client client = clientRepository.findById(id).orElseThrow(()->
-                new IllegalStateException("Client with id " + id + " does not exist"));
-
-        if(name!=null && name.length() > 0 && !Objects.equals(name, client.getFullName())){
-            client.setFullName(name);
-        }
-        if(email!=null && email.length() > 0 && !Objects.equals(email, client.getEmail())){
-            Optional<Client> clientByEmail= clientRepository.findByEmail(client.getEmail());
-            if(clientByEmail.isPresent()){
-                throw new IllegalStateException("Student with email " + client.getEmail() + " already exists");
-            }
-            client.setEmail(email);
-        }
-
-    }*/
-
-  /*  public void deleteClient(Long id){
-
-        boolean exists = clientRepository.existsById(id);
-
-        if(!exists){
-            throw new IllegalStateException("Client not found");
-        }
-
-        clientRepository.deleteById(id);
-    }*/
 
     public void deleteClient(Long id) {
         Optional<Client> client = clientRepository.findById(id);
@@ -95,6 +69,7 @@ public class ClientService {
 
         client.get().setActive(false);
     }
+
 
 
 }

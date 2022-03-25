@@ -36,7 +36,7 @@ class ClientsControllerTest {
     @Test
     void getClients() throws Exception {
         Client client = new Client(1L, "salma@gmail.com", "11111111", "Salma", 23, "Female", true);
-        Client client1 = new Client(2L, "salma@gmail.com", "11111111", "Hamza", 23, "Female", true);
+        Client client1 = new Client(2L, "salma@gmail.com", "11111111", "salmaa", 23, "Female", true);
 
         List<Client> list = new ArrayList<>();
 

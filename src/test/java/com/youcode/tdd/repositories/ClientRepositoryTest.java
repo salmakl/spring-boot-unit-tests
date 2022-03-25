@@ -19,7 +19,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 @ExtendWith(MockitoExtension.class)
-@RunWith(MockitoJUnitRunner.Silent.class)
 class ClientRepositoryTest {
 
     @Mock

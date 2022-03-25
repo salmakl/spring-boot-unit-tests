@@ -6,8 +6,10 @@ import static org.mockito.Mockito.when;
 import com.youcode.tdd.entities.Client;
 import com.youcode.tdd.repositories.ClientRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class ClientServiceTest {
 
     @Mock
@@ -70,6 +72,9 @@ class ClientServiceTest {
         assertEquals(client, clientService.getClientByEmail("salma@gmail.com"));
 
     }
+
+
+
 
 
 

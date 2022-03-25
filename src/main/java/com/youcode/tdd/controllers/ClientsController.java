@@ -32,6 +32,11 @@ public class ClientsController {
         clientService.newClient(client);
     }
 
+    @GetMapping("/all/{gender}")
+    public  List<Client> getClientsByGender(@PathVariable("gender") String gender){
+        return clientService.getClientsByGender(gender);
+    }
+
     @GetMapping("{clientId:^\\d+$}")
     public Optional<Client> getClientById(@PathVariable("clientId") Long id) {
         return clientService.getClientById(id);
